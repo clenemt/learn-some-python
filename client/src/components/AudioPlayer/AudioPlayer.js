@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+
 import { useTrack } from '../../stores/useTrack';
 import { noop } from '../../utils/generic';
 import styles from './AudioPlayer.module.css';

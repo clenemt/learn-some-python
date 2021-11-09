@@ -1,4 +1,5 @@
 import React from 'react';
+
 import styles from './TrackRow.module.css';
 
 function TrackRow({ track, handlePlay }) {

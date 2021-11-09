@@ -2,8 +2,9 @@ import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { QueryClientProvider } from 'react-query';
-import { queryClient } from './apis/utils';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+import { queryClient } from './apis/utils';
 import AudioPlayer from './components/AudioPlayer/AudioPlayer';
 import { Delayed } from './components/Delayed/Delayed';
 

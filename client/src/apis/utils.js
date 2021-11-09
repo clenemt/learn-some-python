@@ -1,5 +1,6 @@
 import npmAxios from 'axios';
 import { QueryClient } from 'react-query';
+
 import { REST_URL } from '../utils/constants';
 
 export const axios = npmAxios.create({

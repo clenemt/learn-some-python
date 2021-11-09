@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { useGetTracks } from '../../../apis/tracks';
-import TrackRow from '../../../components/TrackRow/TrackRow';
 import Main from '../../../components/Main/Main';
+import TrackRow from '../../../components/TrackRow/TrackRow';
 import { useTrack } from '../../../stores/useTrack';
 
 function Tracks() {

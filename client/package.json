@@ -36,8 +36,45 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
-    ]
+      "react-app/jest",
+      "plugin:import/recommended"
+    ],
+    "rules": {
+      "import/order": [
+        "error",
+        {
+          "groups": [
+            [
+              "builtin",
+              "external"
+            ],
+            [
+              "internal",
+              "parent",
+              "sibling",
+              "index"
+            ],
+            [
+              "unknown",
+              "object"
+            ]
+          ],
+          "pathGroups": [
+            {
+              "pattern": "{assets,styles}/**",
+              "group": "index",
+              "position": "after"
+            }
+          ],
+          "pathGroupsExcludedImportTypes": [],
+          "newlines-between": "always",
+          "alphabetize": {
+            "order": "asc",
+            "caseInsensitive": false
+          }
+        }
+      ]
+    }
   },
   "browserslist": {
     "production": [
