@@ -1,5 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { useTrack } from '../../stores/useTrack';
 import styles from './AudioPlayer.module.css';
+
+// Simple wrapper bound to the store
+function AudioPlayerWrapper() {
+  const track = useTrack(state => state.track);
+  return track ? <AudioPlayer track={track} /> : null;
+}
 
 function AudioPlayer({ track }) {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -32,9 +39,15 @@ function AudioPlayer({ track }) {
   };
 
   useEffect(() => {
-    audioRef.current.addEventListener('play', handlePlay);
-    audioRef.current.addEventListener('pause', handlePause);
-    audioRef.current.addEventListener('timeupdate', handleTimeUpdate);
+    const audio = audioRef.current;
+    audio.addEventListener('play', handlePlay);
+    audio.addEventListener('pause', handlePause);
+    audio.addEventListener('timeupdate', handleTimeUpdate);
+    return () => {
+      audio.removeEventListener('play', handlePlay);
+      audio.removeEventListener('pause', handlePause);
+      audio.removeEventListener('timeupdate', handleTimeUpdate);
+    };
   }, []);
 
   useEffect(() => {
@@ -98,4 +111,4 @@ function AudioPlayer({ track }) {
   );
 }
 
-export default AudioPlayer;
+export default AudioPlayerWrapper;

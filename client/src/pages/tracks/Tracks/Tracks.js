@@ -1,22 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { useGetTracks } from '../../../apis/tracks';
 import TrackRow from '../../../components/TrackRow/TrackRow';
-import AudioPlayer from '../../../components/AudioPlayer/AudioPlayer';
 import Main from '../../../components/Main/Main';
+import { useTrack } from '../../../stores/useTrack';
 
 function Tracks() {
-  const [currentTrack, setCurrentTrack] = useState();
+  const setTrack = useTrack(state => state.setTrack);
   const { data: tracks = [] } = useGetTracks();
-
-  const handlePlay = track => setCurrentTrack(track);
 
   return (
     <Main>
       {tracks.map((track, ix) => (
-        <TrackRow key={ix} track={track} handlePlay={handlePlay} />
+        <TrackRow key={ix} track={track} handlePlay={setTrack} />
       ))}
-      {currentTrack && <AudioPlayer track={currentTrack} />}
     </Main>
   );
 }
