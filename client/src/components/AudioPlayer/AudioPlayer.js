@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useTrack } from '../../stores/useTrack';
+import { noop } from '../../utils/generic';
 import styles from './AudioPlayer.module.css';
 
 // Simple wrapper bound to the store
@@ -51,7 +52,8 @@ function AudioPlayer({ track }) {
   }, []);
 
   useEffect(() => {
-    audioRef.current.play();
+    // Silent error if not coming from user interaction
+    audioRef.current.play().catch(noop);
     audioRef.current.currentTime = 0;
   }, [track]);
 
