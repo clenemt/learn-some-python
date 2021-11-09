@@ -1,0 +1,25 @@
+.DS_Store
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependencies
+node_modules/
+.venv
+.npm
+
+# TypeScript
+typings/
+*.tsbuildinfo
+
+# Build
+dist/
+data/
+*.pyc
+build/Release
+
+# Editor/IDE
+.idea/
+.vscode/
