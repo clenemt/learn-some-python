@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import Confetti from 'react-dom-confetti';
 import { Link } from 'react-router-dom';
 
 import { useCreatePlaylist, useGetPlaylists } from '../../../apis/playlists';
@@ -8,6 +9,22 @@ import Main from '../../../components/Main/Main';
 import { Modal } from '../../../components/Modal/Modal';
 import { elapsed, sortByDateDesc } from '../../../utils/generic';
 import styles from './Playlists.module.css';
+
+const ANIMATION_DURATION = 3000;
+
+const CONFIG = {
+  angle: 90,
+  spread: 360,
+  startVelocity: 40,
+  elementCount: 70,
+  dragFriction: 0.12,
+  duration: ANIMATION_DURATION,
+  stagger: 3,
+  width: '10px',
+  height: '10px',
+  perspective: '500px',
+  colors: ['#a864fd', '#29cdff', '#78ff44', '#ff718d', '#fdff6a']
+};
 
 function Playlists() {
   const [open, setOpen] = useState(false);
@@ -21,8 +38,9 @@ function Playlists() {
   const handleCreatePlaylist = async event => {
     event.preventDefault();
     const name = event.currentTarget.name.value.trim();
+    if (!name) return;
     await createPlaylist.mutateAsync({ name });
-    setOpen(false);
+    setTimeout(() => setOpen(false), ANIMATION_DURATION / 2);
   };
 
   const handleClick = () => setOpen(true);
@@ -49,6 +67,7 @@ function Playlists() {
               loading={createPlaylist.isLoading}
             >
               Create
+              <Confetti active={createPlaylist.isLoading} config={CONFIG} />
             </Button>
             <Button onClick={handleClose}>Cancel</Button>
           </div>
