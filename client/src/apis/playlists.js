@@ -21,6 +21,11 @@ const postPlaylist = async ({ name }) => {
   return data;
 };
 
+const patchPlaylist = async playlist => {
+  const { data } = await axios.patch(`playlists/${playlist.id}/`, playlist);
+  return data;
+};
+
 const deletePlaylist = async playlistId => {
   const { data } = await axios.delete(`playlists/${playlistId}`);
   return data;
@@ -53,6 +58,17 @@ export const useDeletePlaylist = () =>
     onSuccess: (data, playlistId) => {
       queryClient.setQueryData(PLAYLISTS_KEY, playlists =>
         playlists.filter(playlist => playlist.id !== playlistId)
+      );
+    }
+  });
+
+export const usePatchPlaylist = () =>
+  useMutation(playlist => patchPlaylist(playlist), {
+    onSuccess: updatedPlaylist => {
+      queryClient.setQueryData(PLAYLISTS_KEY, playlists =>
+        playlists.map(playlist =>
+          playlist.id === updatedPlaylist.id ? updatedPlaylist : playlist
+        )
       );
     }
   });

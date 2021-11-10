@@ -79,17 +79,24 @@ function Playlist() {
         <Button onClick={handleClick}>Delete playlist</Button>
       </div>
       <h1>{playlist?.name || ''}</h1>
-      <ul className={styles.playlists}>
-        {tracks.map((track, index) => (
-          <TrackRow
-            key={track.id}
-            track={track}
-            active={isPlaying && track.id === currentTrack?.id}
-            handlePlay={handlePlay}
-            number={index + 1}
-          />
-        ))}
-      </ul>
+      {tracks.length ? (
+        <ul className={styles.playlists}>
+          {tracks.map((track, index) => (
+            <TrackRow
+              key={track.id}
+              track={track}
+              active={isPlaying && track.id === currentTrack?.id}
+              handlePlay={handlePlay}
+              number={index + 1}
+            />
+          ))}
+        </ul>
+      ) : (
+        <>
+          <p>This looks awfully empty 😅.</p>
+          <Link to="/">Let's add some tracks.</Link>
+        </>
+      )}
     </Main>
   );
 }

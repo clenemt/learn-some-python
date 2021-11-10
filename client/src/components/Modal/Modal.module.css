@@ -22,7 +22,7 @@
   position: relative;
   width: 100%;
   padding: 2rem;
-  background-color: var(--gray-400);
+  background-color: var(--gray-500);
   border-radius: 0.25rem;
   /* Remove focus outline from opened modal */
   outline: 0;

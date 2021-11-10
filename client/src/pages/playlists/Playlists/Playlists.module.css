@@ -6,7 +6,7 @@
   align-items: center;
   width: 100%;
   height: 5rem;
-  border-bottom: 1px solid var(--gray-300);
+  border-bottom: 1px solid var(--gray-400);
   background-color: transparent;
   text-align: left;
   color: var(--white);
@@ -14,7 +14,7 @@
 
 .playlist:hover {
   color: var(--white);
-  background: var(--gray-400);
+  background: var(--gray-500);
   text-decoration: none;
 }
 
@@ -24,7 +24,7 @@
 
 .playlistNumber {
   width: 1rem;
-  color: var(--gray-100);
+  color: var(--gray-200);
   margin: 0 1.5rem 0 1rem;
 }
 
@@ -35,5 +35,5 @@
 
 .playlistDate {
   margin: 0 1rem 0 auto;
-  color: var(--gray-100);
+  color: var(--gray-200);
 }

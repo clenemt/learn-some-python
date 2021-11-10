@@ -16,7 +16,7 @@
 
 .menu li a {
   display: block;
-  color: var(--gray-100);
+  color: var(--gray-200);
   text-decoration: none;
   font-size: 1.25rem;
   padding: 0.5rem 0;
