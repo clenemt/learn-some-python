@@ -5,12 +5,15 @@ import { persist } from 'zustand/middleware';
 export const useTrack = create(
   persist(
     set => ({
-      track: 0,
-      setTrack: track => set(() => ({ track }))
+      track: null,
+      isPlaying: false,
+      setTrack: track => set(() => ({ track, isPlaying: true })),
+      setIsPlaying: isPlaying => set(() => ({ isPlaying }))
     }),
     {
       name: 'track',
-      getStorage: () => sessionStorage
+      getStorage: () => sessionStorage,
+      partialize: ({ track }) => ({ track })
     }
   )
 );

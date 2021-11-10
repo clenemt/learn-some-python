@@ -48,6 +48,15 @@
     format('woff2');
 }
 
+:root {
+  --blue: #009de0;
+  --white: #fff;
+  --black: #000;
+  --gray-100: #767676;
+  --gray-200: #333;
+  --gray-300: #242424;
+}
+
 body {
   margin: 0;
   font-family: 'Epidemic', sans-serif;
@@ -60,4 +69,13 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+button {
+  cursor: pointer;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  font-size: 1em;
+  box-shadow: 0;
 }

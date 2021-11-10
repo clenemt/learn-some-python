@@ -7,10 +7,13 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier --write 'src/**/*.{js,scss}' && eslint src/ --fix"
+    "format": "prettier --write 'src/**/*.{js,scss}' && eslint src/ --fix",
+    "analyze": "npm run build && source-map-explorer 'build/static/js/*.js'"
   },
   "dependencies": {
     "axios": "^0.24.0",
+    "clsx": "^1.1.1",
+    "date-fns": "^2.25.0",
     "history": "^5.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -26,7 +29,8 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.2",
     "prettier": "^2.4.1",
-    "react-scripts": "^4.0.3"
+    "react-scripts": "^4.0.3",
+    "source-map-explorer": "^2.5.2"
   },
   "prettier": {
     "arrowParens": "avoid",

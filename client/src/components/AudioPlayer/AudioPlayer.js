@@ -1,62 +1,36 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef } from 'react';
 
+import { ReactComponent as Pause } from '../../assets/pause.svg';
+import { ReactComponent as Play } from '../../assets/play.svg';
 import { useTrack } from '../../stores/useTrack';
-import { noop } from '../../utils/generic';
 import styles from './AudioPlayer.module.css';
+import { useAudioPlayer } from './useAudioPlayer';
 
 // Simple wrapper bound to the store
 function AudioPlayerWrapper() {
   const track = useTrack(state => state.track);
-  return track ? <AudioPlayer track={track} /> : null;
+  const isPlaying = useTrack(state => state.isPlaying);
+  const setIsPlaying = useTrack(state => state.setIsPlaying);
+
+  return track ? (
+    <AudioPlayer
+      track={track}
+      isPlaying={isPlaying}
+      handlePlaying={setIsPlaying}
+    />
+  ) : null;
 }
 
-function AudioPlayer({ track }) {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(0);
+function AudioPlayer({ track, isPlaying, handlePlaying }) {
   const audioRef = useRef(null);
+  const progress = useAudioPlayer(audioRef, track, isPlaying, handlePlaying);
 
-  const handlePlay = () => {
-    setIsPlaying(true);
-  };
-
-  const handlePause = () => {
-    setIsPlaying(false);
-  };
-
-  const handleTimeUpdate = e => {
-    setProgress(e.target.currentTime / e.target.duration);
-  };
-
-  const handleSliderChange = e => {
+  const handleSliderChange = event => {
     audioRef.current.currentTime =
-      (e.target.value / 1000) * audioRef.current.duration;
+      (event.target.value / 1000) * audioRef.current.duration;
   };
 
-  const handleTogglePlaybackClick = () => {
-    if (audioRef.current.paused) {
-      audioRef.current.play();
-    } else {
-      audioRef.current.pause();
-    }
-  };
-
-  useEffect(() => {
-    const audio = audioRef.current;
-    audio.addEventListener('play', handlePlay);
-    audio.addEventListener('pause', handlePause);
-    audio.addEventListener('timeupdate', handleTimeUpdate);
-    return () => {
-      audio.removeEventListener('play', handlePlay);
-      audio.removeEventListener('pause', handlePause);
-      audio.removeEventListener('timeupdate', handleTimeUpdate);
-    };
-  }, []);
-
-  useEffect(() => {
-    // Silent error if not coming from user interaction
-    audioRef.current.play().catch(noop);
-    audioRef.current.currentTime = 0;
-  }, [track]);
+  const handleTogglePlaybackClick = () => handlePlaying(!isPlaying);
 
   return (
     <>
@@ -66,33 +40,15 @@ function AudioPlayer({ track }) {
           className={styles.togglePlaybackButton}
           onClick={handleTogglePlaybackClick}
         >
-          {isPlaying ? (
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M10 5H7V19H10V5ZM17 5H14V19H17V5Z"
-                fill="#000"
-              />
-            </svg>
-          ) : (
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M20 12L8 5V19L20 12Z" fill="#000" />
-            </svg>
-          )}
+          {isPlaying ? <Pause /> : <Play />}
         </button>
+        <img
+          src={track.cover_art}
+          className={styles.trackCover}
+          alt="album cover"
+          loading="lazy"
+          height="40"
+        />
         <div className={styles.trackInfo}>
           <div className={styles.trackTitle}>{track.title}</div>
           <div className={styles.trackArtist}>

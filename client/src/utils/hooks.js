@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+// Hook to render with delay
 export const useDelayedRender = delay => {
   const [delayed, setDelayed] = useState(true);
   useEffect(() => {
