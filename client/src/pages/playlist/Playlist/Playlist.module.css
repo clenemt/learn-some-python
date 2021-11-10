@@ -1,0 +1,14 @@
+.actions {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.back {
+  color: var(--white);
+  margin-right: 2rem;
+}
+
+.back:hover {
+  color: var(--white);
+}

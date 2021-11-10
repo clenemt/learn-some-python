@@ -23,7 +23,7 @@ ReactDOM.render(
             <Route path="/" element={<Tracks />} />
             <Route path="/tracks" element={<Tracks />} />
             <Route path="/playlists" element={<Playlists />} />
-            <Route path="/playlist/:playlistId" element={<Playlist />} />
+            <Route path="/playlists/:playlistId" element={<Playlist />} />
           </Routes>
           <AudioPlayer />
         </Suspense>

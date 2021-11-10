@@ -1,0 +1,66 @@
+.modal {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Prevent Chrome from adding a focus outline */
+  outline: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.dialog {
+  position: relative;
+  width: auto;
+  margin: 0.5rem;
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  width: 100%;
+  padding: 2rem;
+  background-color: var(--gray-400);
+  border-radius: 0.25rem;
+  /* Remove focus outline from opened modal */
+  outline: 0;
+  pointer-events: auto;
+}
+
+.backdrop {
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--black);
+  opacity: 0.5;
+}
+
+.close {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  width: 2rem;
+  height: 2rem;
+  padding: 1rem;
+  color: var(--white);
+  background: transparent url('../../assets/cross.svg') center/2rem auto
+    no-repeat;
+  opacity: 0.75;
+}
+
+.close:hover,
+.close:focus {
+  opacity: 1;
+}
+
+@media (min-width: 600px) {
+  .dialog {
+    max-width: 500px;
+    margin: 12rem auto;
+  }
+}
