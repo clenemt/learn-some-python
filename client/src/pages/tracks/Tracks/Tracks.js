@@ -13,7 +13,7 @@ function Tracks() {
   const { data: tracks = [] } = useGetTracks();
 
   const handlePlay = nextTrack => {
-    if (currentTrack.id === nextTrack.id) {
+    if (currentTrack?.id === nextTrack.id) {
       setIsPlaying(!isPlaying);
     } else {
       setTrack(nextTrack);
@@ -26,7 +26,7 @@ function Tracks() {
         <TrackRow
           key={track.id}
           track={track}
-          active={isPlaying && track.id === currentTrack.id}
+          active={isPlaying && track.id === currentTrack?.id}
           handlePlay={handlePlay}
           number={index + 1}
         />
