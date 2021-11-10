@@ -38,7 +38,7 @@ function Input({
         {...rest}
       />
       {text && (
-        <div className="form-text" id={`${id}-help`}>
+        <div className={styles.text} id={`${id}-help`}>
           {text}
         </div>
       )}

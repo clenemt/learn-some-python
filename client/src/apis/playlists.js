@@ -70,5 +70,9 @@ export const usePatchPlaylist = () =>
           playlist.id === updatedPlaylist.id ? updatedPlaylist : playlist
         )
       );
+      queryClient.setQueryData(
+        [PLAYLISTS_KEY, updatedPlaylist.id],
+        updatedPlaylist
+      );
     }
   });

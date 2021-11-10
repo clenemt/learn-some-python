@@ -87,16 +87,32 @@
   position: relative;
 }
 
-.trackAddToPlaylist > button {
+.trackAddToPlaylist > button,
+.trackRemoveFromPlaylist {
   background: transparent;
-  margin-right: 3rem;
+  margin-right: 2rem;
+  color: var(--gray-100);
+  padding: 1rem;
+}
+
+.trackAddToPlaylist > button:hover,
+.trackRemoveFromPlaylist:hover,
+.trackAddToPlaylist > button:focus,
+.trackRemoveFromPlaylist:focus {
+  color: var(--white);
+}
+
+/* Visually align */
+.trackRemoveFromPlaylist {
+  position: relative;
+  top: 2px;
 }
 
 .menu {
   position: absolute;
   z-index: 1;
-  top: calc(100% + 0.5rem);
-  left: -0.25rem;
+  top: calc(100% - 0.5rem);
+  left: 0.75rem;
   background: var(--gray-400);
   border: 1px solid var(--gray-200);
   padding-top: 0.75rem;

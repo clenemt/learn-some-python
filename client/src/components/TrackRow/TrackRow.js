@@ -1,7 +1,8 @@
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { ReactComponent as List } from '../../assets/list.svg';
+import { ReactComponent as Minus } from '../../assets/minus.svg';
 import { ReactComponent as Pause } from '../../assets/pause.svg';
 import { ReactComponent as Play } from '../../assets/play.svg';
 import { duration } from '../../utils/generic';
@@ -15,7 +16,8 @@ function TrackRow({
   playlists,
   handleMenu,
   isMenuOpen,
-  handleAddToPlaylist
+  handleAddToPlaylist,
+  handleDeleteFromPlaylist
 }) {
   return (
     <div className={clsx(styles.trackRow, active && styles.active)}>
@@ -48,6 +50,7 @@ function TrackRow({
           <button
             type="button"
             title="Add to playlist"
+            aria-label="Add to playlist"
             onClick={() => handleMenu(track.id)}
           >
             <List />
@@ -67,6 +70,17 @@ function TrackRow({
             </div>
           )}
         </div>
+      )}
+      {handleDeleteFromPlaylist && (
+        <button
+          type="button"
+          className={styles.trackRemoveFromPlaylist}
+          title="Remove from playlist"
+          aria-label="Remove from playlist"
+          onClick={() => handleDeleteFromPlaylist(track.id)}
+        >
+          <Minus />
+        </button>
       )}
       <div className={styles.trackDuration}>{duration(track.length)}</div>
     </div>

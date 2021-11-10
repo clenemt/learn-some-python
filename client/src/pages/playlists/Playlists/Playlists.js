@@ -33,7 +33,14 @@ function Playlists() {
       <Modal open={open} onClose={handleClose}>
         <form onSubmit={handleCreatePlaylist}>
           <h3>New playlist</h3>
-          <Input autoFocus name="name" label="Board name" maxLength={200} />
+          <Input
+            autoFocus
+            name="name"
+            placeholder="Trying to come up with something funny..."
+            label="Playlist name"
+            maxLength={200}
+            text={`Maybe something like "Squid Game 2021"`}
+          />
           <div className="t-right">
             <Button
               type="submit"
@@ -48,24 +55,33 @@ function Playlists() {
         </form>
       </Modal>
 
-      <Button variant="primary" className="mb-3" onClick={handleClick}>
-        New playlist
-      </Button>
-      <ul className={styles.playlists}>
-        {playlists.map((playlist, index) => (
-          <Link
-            key={playlist.id}
-            className={styles.playlist}
-            to={`/playlists/${playlist.id}`}
-          >
-            <span className={styles.playlistNumber}>{index + 1}</span>
-            <span className={styles.playlistName}>{playlist.name}</span>
-            <span className={styles.playlistDate}>
-              {elapsed(new Date(playlist.updated_at))}
-            </span>
-          </Link>
-        ))}
-      </ul>
+      {playlists.length ? (
+        <>
+          <Button variant="primary" className="mb-3" onClick={handleClick}>
+            New playlist
+          </Button>
+          <ul className={styles.playlists}>
+            {playlists.map((playlist, index) => (
+              <Link
+                key={playlist.id}
+                className={styles.playlist}
+                to={`/playlists/${playlist.id}`}
+              >
+                <span className={styles.playlistNumber}>{index + 1}</span>
+                <span className={styles.playlistName}>{playlist.name}</span>
+                <span className={styles.playlistDate}>
+                  {elapsed(new Date(playlist.updated_at))}
+                </span>
+              </Link>
+            ))}
+          </ul>
+        </>
+      ) : (
+        <>
+          <p>This looks awfully empty 😅.</p>
+          <Button onClick={handleClick}>Let's create a new playlist.</Button>
+        </>
+      )}
     </Main>
   );
 }

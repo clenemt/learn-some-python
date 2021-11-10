@@ -1,7 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
-import { useDeletePlaylist, useGetPlaylist } from '../../../apis/playlists';
+import {
+  useDeletePlaylist,
+  useGetPlaylist,
+  usePatchPlaylist
+} from '../../../apis/playlists';
 import { useGetTracks } from '../../../apis/tracks';
 import Button from '../../../components/Button/Button';
 import Main from '../../../components/Main/Main';
@@ -15,9 +19,10 @@ function Playlist() {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
-  const { data: allTracks = [] } = useGetTracks();
+  const patchPlaylist = usePatchPlaylist();
   const deletePlaylist = useDeletePlaylist();
   const { data: playlist } = useGetPlaylist(playlistId);
+  const { data: allTracks = [] } = useGetTracks();
 
   const setTrack = useTrack(state => state.setTrack);
   const isPlaying = useTrack(state => state.isPlaying);
@@ -42,6 +47,13 @@ function Playlist() {
     await deletePlaylist.mutateAsync(playlistId);
     navigate('/playlists');
     setOpen(false);
+  };
+
+  const handleDeleteFromPlaylist = async trackId => {
+    await patchPlaylist.mutateAsync({
+      ...playlist,
+      tracks: playlist.tracks.filter(id => id !== trackId)
+    });
   };
 
   const handleClick = () => setOpen(true);
@@ -88,6 +100,7 @@ function Playlist() {
               active={isPlaying && track.id === currentTrack?.id}
               handlePlay={handlePlay}
               number={index + 1}
+              handleDeleteFromPlaylist={handleDeleteFromPlaylist}
             />
           ))}
         </ul>
